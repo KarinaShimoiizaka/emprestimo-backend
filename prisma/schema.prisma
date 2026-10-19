@@ -1,0 +1,33 @@
+// Esquema do EMPREST.AI.
+//
+// Escopo desta entrega: BE-02 (autenticação e identidade). Os modelos
+// Equipamento e Emprestimo descritos na BE-01 §3 entram quando a BE-01 for
+// implementada.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// Espelho local de auth.users: o que o Supabase não sabe sobre a pessoa.
+/// A linha é criada pelo backend no primeiro request autenticado (BE-02 §4).
+model Perfil {
+  id       String   @id @db.Uuid // = auth.users.id
+  nome     String
+  papel    Papel    @default(colaborador)
+  criadoEm DateTime @default(now()) @map("criado_em")
+
+  @@map("perfil")
+}
+
+enum Papel {
+  colaborador
+  operacoes
+
+  @@map("papel")
+}
