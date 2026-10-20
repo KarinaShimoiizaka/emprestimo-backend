@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "node node_modules/@nestjs/cli/bin/nest.js build",
+    "postinstall": "node node_modules/prisma/build/index.js generate",
+    "build":"node node_modules/@nestjs/cli/bin/nest.js build",
     "start": "node dist/main",
     "start:dev": "node node_modules/@nestjs/cli/bin/nest.js start --watch",
     "test": "node node_modules/jest/bin/jest.js",

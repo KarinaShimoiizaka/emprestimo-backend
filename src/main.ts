@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { Logger, ValidationPipe } from "@nestjs/common";
+import { Logger, RequestMethod, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 
 import { AppModule } from "./app.module";
@@ -9,7 +9,7 @@ import { FiltroDeExcecao } from "./comum/filtro-de-excecao";
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix("api");
+  app.setGlobalPrefix("api", { exclude: [{ path: "/", method: RequestMethod.GET }] });
   app.useGlobalFilters(new FiltroDeExcecao());
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }),
