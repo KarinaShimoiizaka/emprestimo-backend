@@ -1,0 +1,149 @@
+{
+  "origem": "Lista da prática (emprestimo-tools-kit: .claude/skills/imagens-equipamentos/references/equipamentos.json) e fotos publicadas (emprestimo-tools-kit: imagens/manifesto.json). BE-03 §3.",
+  "equipamentos": [
+    {
+      "patrimonio": "TI-0001",
+      "nome": "Notebook 14 polegadas",
+      "categoria": "notebook",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0001.jpg",
+        "autor": "Monoar_CGI_Artist",
+        "origem": "https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0002",
+      "nome": "Notebook 15 polegadas",
+      "categoria": "notebook",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0002.jpg",
+        "autor": "kaboompics",
+        "origem": "https://pixabay.com/photos/technology-laptop-computer-netbook-791032/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0003",
+      "nome": "Notebook 13 polegadas",
+      "categoria": "notebook",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0003.jpg",
+        "autor": "Pixies",
+        "origem": "https://pixabay.com/photos/technology-keyboard-computing-785742/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0004",
+      "nome": "Notebook 15 polegadas",
+      "categoria": "notebook",
+      "situacao": "manutencao",
+      "imagem": {
+        "caminho": "equipamentos/TI-0004.jpg",
+        "autor": "picjumbo_com",
+        "origem": "https://pixabay.com/photos/office-desk-smartphone-modern-865091/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0005",
+      "nome": "Monitor 24 polegadas",
+      "categoria": "monitor",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0005.jpg",
+        "autor": "yeiferr",
+        "origem": "https://pixabay.com/photos/computer-laptop-tech-blue-computer-4795762/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0006",
+      "nome": "Monitor 27 polegadas",
+      "categoria": "monitor",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0006.jpg",
+        "autor": "Pexels",
+        "origem": "https://pixabay.com/photos/apple-smartphone-desk-laptop-1282241/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0007",
+      "nome": "Monitor 22 polegadas",
+      "categoria": "monitor",
+      "situacao": "manutencao",
+      "imagem": {
+        "caminho": "equipamentos/TI-0007.jpg",
+        "autor": "Mariakray",
+        "origem": "https://pixabay.com/photos/technology-devices-electronics-6801334/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0008",
+      "nome": "Cabo HDMI 2 m",
+      "categoria": "cabo",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0008.jpg",
+        "autor": "WikimediaImages",
+        "origem": "https://pixabay.com/photos/hdmi-connector-cable-plug-2202226/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0009",
+      "nome": "Cabo USB-C 1 m",
+      "categoria": "cabo",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0009.jpg",
+        "autor": "ds_30",
+        "origem": "https://pixabay.com/photos/cable-computer-usb-technology-4875319/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0010",
+      "nome": "Cabo de rede 3 m",
+      "categoria": "cabo",
+      "situacao": "manutencao",
+      "imagem": {
+        "caminho": "equipamentos/TI-0010.jpg",
+        "autor": "blickpixel",
+        "origem": "https://pixabay.com/photos/network-cable-cable-patch-494649/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0011",
+      "nome": "Webcam Full HD",
+      "categoria": "camera",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0011.jpg",
+        "autor": "sarinharas",
+        "origem": "https://pixabay.com/photos/portable-computer-computer-pra%C3%A7a-1155173/",
+        "licenca": "Pixabay Content License"
+      }
+    },
+    {
+      "patrimonio": "TI-0012",
+      "nome": "Câmera compacta",
+      "categoria": "camera",
+      "situacao": "disponivel",
+      "imagem": {
+        "caminho": "equipamentos/TI-0012.jpg",
+        "autor": "Edeltravel_",
+        "origem": "https://pixabay.com/photos/holidays-book-online-travel-book-4516107/",
+        "licenca": "Pixabay Content License"
+      }
+    }
+  ]
+}
