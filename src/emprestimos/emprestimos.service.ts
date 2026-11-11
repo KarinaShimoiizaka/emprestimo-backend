@@ -90,7 +90,6 @@ export class EmprestimosService {
 
     const equipamento = await this.repositorio.equipamento(equipamentoId);
     if (!equipamento) throw new EquipamentoNaoEncontrado();
-    if (equipamento.situacao === "manutencao") throw new EmManutencao();
     if (equipamento.emprestimoAberto) throw new EquipamentoIndisponivel();
 
     const abertos = await this.repositorio.abertosDe(perfilId);
