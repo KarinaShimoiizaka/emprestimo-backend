@@ -49,6 +49,10 @@ model Equipamento {
   patrimonio  String            @unique
   situacao    SituacaoFisica    @default(disponivel)
   observacao  String?
+  imagemCaminho String?         // foto: caminho no bucket (BE-03 §2)
+  imagemAutor   String?
+  imagemOrigem  String?
+  imagemLicenca String?
   criadoEm    DateTime          @default(now())
   emprestimos Emprestimo[]
 }
@@ -271,7 +275,11 @@ paginação · webhooks · versionamento da API.
 
 | # | Questão | Efeito |
 |---|---|---|
-| 1 | O `STORAGE_NAME` no `.env` sugere Supabase Storage. Vai ter foto de equipamento? | entra campo, upload e política de bucket |
 | 2 | Quem cria a linha em `Perfil`: trigger no Supabase ou primeiro login? | muda o fluxo da BE-02 §4 |
 | 3 | Devolução com atraso registra algo além da data? | hoje o atraso some assim que devolve; talvez interesse guardar |
 | 4 | Operações pode cancelar um empréstimo (item sumiu, foi quebrado)? | nasce um estado novo no empréstimo |
+
+> **Decidido na [BE-03](spec-dados-iniciais.md) §2** (era a decisão em aberto 1):
+> vai ter foto de equipamento, guardada como caminho no bucket do Supabase
+> Storage, com o crédito ao lado. Não há upload pela API: as fotos vêm da
+> skill `imagens-equipamentos` ([ADR-002](../../docs/adrs/adr-002-imagens-equipamentos.md)).
