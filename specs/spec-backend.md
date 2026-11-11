@@ -1,10 +1,11 @@
 # BE-01 — Backend
 
-**Status:** proposta. `application/backend/` tem hoje apenas o `DockerFile` e
-o `.env`; não há código.
+**Status:** rascunho. `backend/` já tem o projeto NestJS com autenticação e
+perfil ([BE-02](spec-autenticacao.md)) e o Prisma com a migration
+`criar_perfil`; equipamentos, empréstimos e RLS, descritos aqui, não existem.
 
-**Contexto:** [ADR-001](../../../docs/adrs/adr-001-stack.md) (NestJS, Prisma, REST/MVC,
-RLS), [PRD §7](../../../docs/prd.md) (regras), [BE-02](spec-autenticacao.md) (identidade).
+**Contexto:** [ADR-001](../../docs/adrs/adr-001-stack.md) (NestJS, Prisma, REST/MVC,
+RLS), [PRD §7](../../docs/prd.md) (regras), [BE-02](spec-autenticacao.md) (identidade).
 
 ---
 
@@ -240,7 +241,7 @@ a existência do registro.
 
 ## 8. Configuração
 
-Variáveis lidas de `application/backend/.env` (nomes, nunca valores neste
+Variáveis lidas de `backend/.env` (nomes, nunca valores neste
 documento): `DATABASE_URL`, `DIRECT_URL`, `SUPABASE_URL`, `SUPABASE_JWKS_URL`,
 `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `STORAGE_NAME`, `PORT`.
 

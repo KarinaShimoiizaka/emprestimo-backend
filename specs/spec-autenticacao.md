@@ -1,9 +1,10 @@
 # BE-02 — Autenticação e identidade
 
-**Status:** implementada. O código está em `application/backend/src/auth/`,
-`src/perfil/` e `src/comum/`.
+**Status:** aprovada. Implementada, mas ainda não passou pelo
+verificador-spec: esta spec não tem seção "Critérios de aceite". O código
+está em `backend/src/auth/`, `src/perfil/` e `src/comum/`.
 
-**Contexto:** [ADR-001](../../../docs/adrs/adr-001-stack.md) (Supabase Auth + RLS),
+**Contexto:** [ADR-001](../../docs/adrs/adr-001-stack.md) (Supabase Auth + RLS),
 [BE-01](spec-backend.md) (backend).
 **Lado do cliente:** [FE-03](../../frontend/specs/spec-login.md) — a tela de login.
 
@@ -70,7 +71,7 @@ Não existe tela nem endpoint de cadastro. Uma conta nasce assim:
 
 A alternativa era um trigger em `auth.users`. Foi descartada porque o trigger
 vive no schema do Supabase, fora das nossas migrations, e
-[migrations.md](../../../docs/rules/migrations.md) diz que o que não está em
+[migrations.md](../../docs/rules/migrations.md) diz que o que não está em
 migration não existe para o projeto. O `upsert` fica no nosso código, é
 testável, e roda em uma transação que já existe.
 
