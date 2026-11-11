@@ -1,7 +1,8 @@
 // Esquema do EMPREST.AI.
 //
-// Implementado: Perfil (BE-02) e Equipamento (BE-03, a partir da BE-01 §3).
-// Emprestimo entra com a spec de solicitar empréstimo.
+// Implementado: Perfil (BE-02), Equipamento (BE-03) e Emprestimo (BE-04),
+// a partir da BE-01 §3. O que o Prisma não expressa (índice único parcial,
+// check, triggers) está escrito à mão nas migrations.
 
 generator client {
   provider = "prisma-client-js"
@@ -20,6 +21,8 @@ model Perfil {
   nome     String
   papel    Papel    @default(colaborador)
   criadoEm DateTime @default(now()) @map("criado_em")
+
+  emprestimos Emprestimo[]
 
   @@map("perfil")
 }
@@ -48,7 +51,25 @@ model Equipamento {
   imagemLicenca String?        @map("imagem_licenca")
   criadoEm      DateTime       @default(now()) @map("criado_em")
 
+  emprestimos Emprestimo[]
+
   @@map("equipamento")
+}
+
+/// Empréstimo (BE-01 §3, BE-04 §2). Aberto enquanto `devolvidoEm` é nulo.
+/// Datas sem hora: o dia em São Paulo (BE-04 §4).
+model Emprestimo {
+  id            String      @id @default(uuid()) @db.Uuid
+  equipamento   Equipamento @relation(fields: [equipamentoId], references: [id])
+  equipamentoId String      @map("equipamento_id") @db.Uuid
+  perfil        Perfil      @relation(fields: [perfilId], references: [id])
+  perfilId      String      @map("perfil_id") @db.Uuid
+  retiradaEm    DateTime    @map("retirada_em") @db.Date
+  devolverAte   DateTime    @map("devolver_ate") @db.Date
+  devolvidoEm   DateTime?   @map("devolvido_em") @db.Date
+
+  @@index([perfilId])
+  @@map("emprestimo")
 }
 
 enum Categoria {
