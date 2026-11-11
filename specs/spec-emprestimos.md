@@ -1,6 +1,7 @@
 # BE-04 — Solicitar empréstimo
 
-**Status:** aprovada (11/11/2026).
+**Status:** pronta. Aprovada em 11/11/2026; veredito `PRONTA` do
+verificador-spec (`docs/verificacoes/`, no repositório da raiz).
 
 **Contexto:** briefing "solicitar empréstimo" da prática; [PRD §7](../../docs/prd.md)
 (alterado em 11/11/2026: limite de 5 itens, prazo de 14 dias úteis);
