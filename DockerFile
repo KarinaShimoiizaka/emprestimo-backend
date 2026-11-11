@@ -2,11 +2,9 @@
 # ---------------------------------------------------------------------------
 # EMPREST.AI — backend (NestJS + Prisma)
 #
-# ATENÇÃO: ainda não existe código em application/backend/ — nem
-# package.json, nem src/, nem prisma/schema.prisma. Este DockerFile está
-# escrito para o layout que o ADR-001 define e passa a funcionar assim que o
-# projeto Nest for criado. Até lá, o serviço `backend` do compose fica atrás
-# do profile `backend` e não sobe por padrão.
+# No compose, o serviço `backend` fica atrás do profile `backend`
+# (`docker compose --profile backend up`) e usa o Postgres local do serviço
+# `db`: o compose sobrescreve DATABASE_URL e DIRECT_URL do .env.
 #
 # Dois alvos:
 #   --target dev     desenvolvimento, com watch (é o que o compose usa)
@@ -21,6 +19,8 @@ RUN apk add --no-cache libc6-compat
 # --- dependências ----------------------------------------------------------
 FROM base AS deps
 COPY package.json package-lock.json ./
+# O postinstall roda `prisma generate`, que precisa do schema já no lugar.
+COPY prisma/schema.prisma ./prisma/schema.prisma
 RUN npm ci
 
 
