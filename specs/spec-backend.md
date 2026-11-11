@@ -102,10 +102,10 @@ alter table emprestimo
   add constraint prazo_coerente check (devolver_ate > retirada_em);
 
 -- Item em manutenção não pode ser emprestado: trigger que recusa o insert.
--- Limite de 3 por pessoa: trigger que conta os abertos antes do insert.
+-- Limite de 5 por pessoa: trigger que conta os abertos antes do insert.
 ```
 
-O limite de 3 e a trava de manutenção também são verificados no service, para
+O limite de 5 e a trava de manutenção também são verificados no service, para
 devolver um erro legível. A checagem no banco é a rede de segurança contra
 corrida entre duas requisições simultâneas; a do service é a que gera a
 mensagem.
@@ -161,7 +161,7 @@ dado da pessoa vai junto.
 }
 ```
 
-`devolverAte` é `retiradaEm + 14 dias`, calculado **no servidor**. O cliente
+`devolverAte` é `retiradaEm + 14 dias úteis` (segunda a sexta), calculado **no servidor**. O cliente
 não envia data.
 
 ### POST /emprestimos/:id/devolucao
@@ -174,17 +174,23 @@ erro.
 
 | Regra | Camada |
 |---|---|
-| 1. Prazo de 14 dias | service, no cálculo de `devolverAte` |
-| 4. Limite de 3 itens | service (mensagem) + trigger (corrida) |
+| 1. Prazo de 14 dias úteis | service, no cálculo de `devolverAte` |
+| 4. Limite de 5 itens | service (mensagem) + trigger (corrida) |
 | 5. Atraso bloqueia | service, ao solicitar |
 | 6. Manutenção nunca disponível | service + trigger |
 | 7. Item já emprestado | índice único parcial |
 | 8. Busca | cliente |
 | 9. Filtros | cliente |
 | 10. Nome obrigatório no cadastro | DTO com `class-validator` |
-| 11. Escopo por pessoa | RLS + guard |
+| 11. Escopo por pessoa | guard + consulta filtrada por `perfilId` no service ([ADR-003](../../docs/adrs/adr-003-autorizacao-no-backend.md)) |
 
 ## 6. Autorização
+
+> **Substituída pelo [ADR-003](../../docs/adrs/adr-003-autorizacao-no-backend.md)
+> (11/11/2026):** a autorização fica nos guards e no service, com toda
+> consulta de empréstimo filtrada pelo `perfilId` do token. O RLS continua
+> ligado e sem política, só para fechar a API pública do Supabase. O texto
+> abaixo fica como registro do desenho original.
 
 Duas camadas, e as duas precisam existir.
 
@@ -225,7 +231,7 @@ registrar isso como ADR-003 — não manter políticas que nunca rodam.
 Formato único, de um `ExceptionFilter` global:
 
 ```json
-{ "erro": "LIMITE_ATINGIDO", "mensagem": "Você já está com 3 itens.", "status": 422 }
+{ "erro": "LIMITE_ATINGIDO", "mensagem": "Você já está com 5 itens.", "status": 422 }
 ```
 
 | Código | HTTP | Quando |
@@ -234,7 +240,7 @@ Formato único, de um `ExceptionFilter` global:
 | `SEM_PERMISSAO` | 403 | papel insuficiente |
 | `NAO_ENCONTRADO` | 404 | id inexistente, ou invisível por RLS |
 | `EQUIPAMENTO_INDISPONIVEL` | 409 | outra pessoa pegou primeiro |
-| `LIMITE_ATINGIDO` | 422 | já tem 3 abertos |
+| `LIMITE_ATINGIDO` | 422 | já tem 5 abertos |
 | `BLOQUEADO_POR_ATRASO` | 422 | tem item vencido |
 | `EM_MANUTENCAO` | 422 | item não é emprestável |
 | `PATRIMONIO_DUPLICADO` | 409 | patrimônio já existe |
@@ -259,7 +265,7 @@ Jest, como o ADR-001 fixou. O que precisa de teste, em ordem de valor:
 1. **Unitário do service de empréstimos** — as cinco regras, cada uma com o
    caso que passa e o que falha. É aqui que mora o produto.
 2. **Integração com banco real** (container de teste) — que o índice único
-   barra o segundo empréstimo do mesmo item e que o trigger barra o quarto
+   barra o segundo empréstimo do mesmo item e que o trigger barra o sexto
    item da mesma pessoa.
 3. **Que o RLS está mesmo ligado** — conectar como o usuário da aplicação e
    confirmar que um `select` sem contexto não devolve nada. Este teste é o
